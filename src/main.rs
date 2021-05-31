@@ -1,6 +1,6 @@
 // Copyright (c) 2017, The MesaLock Linux Contributors
 // All rights reserved.
-// 
+//
 // This work is licensed under the terms of the BSD 3-Clause License.
 // For a copy, see the LICENSE file.
 
@@ -79,15 +79,15 @@ fn main() {
     // TODO: setup signal handler
 
     // mount -n -t proc proc /proc
-    let proc_mount_flags = mount::MS_NOSUID | mount::MS_NODEV | mount::MS_NOEXEC | mount::MS_RELATIME;
+    let proc_mount_flags = mount::MsFlags::MS_NOSUID | mount::MsFlags::MS_NODEV | mount::MsFlags::MS_NOEXEC | mount::MsFlags::MS_RELATIME;
     let _ = mount::mount(Some("proc"), "/proc", Some("proc"), proc_mount_flags, Some("mode=0555")).expect("mount proc failed");
 
     // mount -n -t devtmpfs devtmpfs /dev
-    let dev_mount_flags = mount::MS_NOSUID | mount::MS_RELATIME;
+    let dev_mount_flags = mount::MsFlags::MS_NOSUID | mount::MsFlags::MS_RELATIME;
     let _ = mount::mount(Some("dev"), "/dev", Some("devtmpfs"), dev_mount_flags, Some("mode=0755")).expect("mount tmp failed");
 
     // mount -n -t sysfs sysfs /sys
-    let sys_mount_flags = mount::MS_NOSUID | mount::MS_NODEV | mount::MS_NOEXEC | mount::MS_RELATIME;
+    let sys_mount_flags = mount::MsFlags::MS_NOSUID | mount::MsFlags::MS_NODEV | mount::MsFlags::MS_NOEXEC | mount::MsFlags::MS_RELATIME;
     let _ = mount::mount(Some("sysfs"), "/sys", Some("sysfs"), sys_mount_flags, Some("mode=0555")).expect("mount sys failed");
 
     run("mknod -m 600 /dev/console c 5 1");
